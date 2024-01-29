@@ -56,7 +56,7 @@ func (g *Group) ExecAll() ([]interface{}, []error, bool) {
 // All will run the promise Func into the slice but if any fails, will skip the subsequent funcs
 // and will return the error returned by the promise Fun
 func (g *Group) All() (_ []interface{}, err error) {
-	results := make([]interface{}, 0, len(g.tasks))
+	results := make([]interface{}, len(g.tasks), len(g.tasks))
 
 	for idx, fn := range g.tasks {
 		go func(idx int, fn Func) {
