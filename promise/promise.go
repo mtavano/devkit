@@ -53,7 +53,8 @@ func (g *Group) ExecAll() ([]interface{}, []error, bool) {
 	return results, errs, hasError
 }
 
-// All will run the promise Func into the slice but if any fails, will skip the subsequent funcs// and will return the error returned by the promise Fun
+// All will run the promise Func into the slice but if any fails, will skip the subsequent funcs
+// and will return the error returned by the promise Fun
 func (g *Group) All() (_ []interface{}, err error) {
 	results := make([]interface{}, 0, len(g.tasks))
 
@@ -71,7 +72,7 @@ func (g *Group) All() (_ []interface{}, err error) {
 				return
 			}
 
-			results = append(results, res)
+			results[idx] = res
 		}(idx, fn)
 	}
 	g.wg.Wait()
